@@ -5,6 +5,7 @@ import Navbar from './component/navbar.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
+import AddPhoto from './pages/AddPhoto.jsx'
 function App() {
 
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/add-photo' element={<AddPhoto />} />
         </Routes>
       </Router>
     </>

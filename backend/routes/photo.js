@@ -12,4 +12,19 @@ photoRouter.get('/',verifyToken, async (req,res)=>{
         res.json(err)
     }
 })
-photoRouter.post()
+photoRouter.post('/add-photo',verifyToken, async(req,res)=>{
+    const { title, caption, imageURL} = req.body
+    
+    try {
+        const URL = await Photo.findOne({imageURL})
+        if(URL){
+            return res.json({msg:'image already in database upload other'})
+        }
+        const NewPhoto = new Photo({title,caption,imageURL})
+        await NewPhoto.save()
+        res.json({msg:'photo added successfully!!'})
+    } catch (err) {
+        res.json(err)
+    }
+})
+export{photoRouter}

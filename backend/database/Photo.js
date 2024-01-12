@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const photoSchema = mongoose.Schema({
     title: { type: String, required: true },
-    description: { type: String },
+    caption: { type: String },
     imageURL: { type: String, required: true }
 });
 
