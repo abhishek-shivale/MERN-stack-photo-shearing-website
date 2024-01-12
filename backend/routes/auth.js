@@ -5,29 +5,47 @@ authRouter.use(express.json());
 import jwt from "jsonwebtoken";
 import userModel from '../database/user.js';
 
-authRouter.post('/register', async(req,res)=>{
-    const {username,password} = req.body
-    const user = await userModel.findOne({username})
-    if(user){
-        res.json({msg:'already registered please login'})
+authRouter.post('/register', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+        const user = await userModel.findOne({ username });
+  
+      if (user) {
+        return res.json({ msg: 'Already registered, please login' });
+      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new userModel({ username, password: hashedPassword });
+      await newUser.save();
+    return res.json({ msg: 'Your account has been created successfully' });
+    } catch (error) {
+      console.error(error);
+      return res.json({ msg: 'Internal Server Error' });
     }
-    const hashedPassword = await bcrypt.hash(password,10)
-    const newUser = new userModel({username,password:hashedPassword})
-    await newUser.save()
-    res.json({msg:'your account has been created successfully'})
-})
-authRouter.post('/login',async(req,res)=>{
-    const {username,password} = req.body
-    const user = await userModel.findOne({username})
-    if(!user){
-       res.json({msg:'Account not found'})
+  });
+  
+authRouter.post('/login', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const user = await userModel.findOne({ username });
+  
+      if (!user) {
+        return res.json({ msg: 'Account not found' });
+      }
+  
+      const isvalid = await bcrypt.compare(password, user.password);
+  
+      if (isvalid) {
+        const token = jwt.sign({ id: user._id }, 'secret');
+        return res.json({ msg: 'Wait for login', token, userID: user._id });
+      } else {
+        return res.json({ msg: 'Invalid password' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ msg: 'Internal Server Error' });
     }
-    const isvalid = await bcrypt.compare(password,user.password)
-    if(isvalid){
-        const token = jwt.sign({id: user._id},'secret')
-        res.json({token,useID:user._id})
-    }
-})
+  });
+  
 
 
 export default authRouter
