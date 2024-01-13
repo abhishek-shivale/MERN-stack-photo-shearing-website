@@ -22,15 +22,15 @@ function Login() {
           password,
         }),
       });
-
-      const data = await res.json();
-      setCookies('access_token', data.token);
-      window.localStorage.setItem('userId', data.userID);
-      setusername('')
-      setpassword('')
+      if(res.success){
+        const data = await res.json();
+        setCookies('access_token', data.token);
+        window.localStorage.setItem('userId', data.userID);
+      }
      
-      setupdate(data.msg);
-      navigate('/');
+
+     
+      return setupdate(data.msg);
     } catch (error) {
       console.error('Login failed:', error.message);
       setupdate('Login failed. Please try again.');

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import AnimeImage from '../assets/anime.jpg'
 import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
     const[photos,setPhotos] = useState([])
     const [cookie, setCookie] = useCookies(['access_token'])
+    const navigate = useNavigate()
    
     async function likefunction(photoID) {
+      if(!cookie.access_token){
+        return navigate('/register')
+      }
       try {
         const res = await fetch('http://localhost:3000/photo/liked-photo', {
           method: 'PUT',
