@@ -22,10 +22,15 @@ function Navbar() {
       <div className='left'>
         <div className='flex gap-5 text-xl font-semibold text-pink-500 mt-5 mr-8'>
           <p className='cursor-pointer'>
-            <Link to="/add-photo">Add Photo</Link>
+           {!cookies.access_token ?( <><Link to="/login">Add Photo</Link>
+           </>):(
+            <Link to="/add-photo">Add Photo</Link>)}
           </p>
           <p className='cursor-pointer'>
-                <Link to="liked-photo">Liked Photo</Link>
+          {!cookies.access_token ?( <><Link to="/login">Liked Photo</Link>
+           </>):(
+            <Link to="liked-photo">Liked Photo</Link>)}
+                
               </p>
          
           {!cookies.access_token ? (

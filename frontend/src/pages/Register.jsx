@@ -19,7 +19,7 @@ function Register() {
                 })
             })
             const data = await res.json()
-            setupdate(data.msg);
+             setupdate(data.msg);
             navigate('/login')
         } catch (error) {
             console.error(error.message);

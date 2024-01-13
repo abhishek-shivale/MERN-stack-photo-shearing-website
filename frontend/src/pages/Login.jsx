@@ -26,8 +26,11 @@ function Login() {
       const data = await res.json();
       setCookies('access_token', data.token);
       window.localStorage.setItem('userId', data.userID);
-      navigate('/');
+      setusername('')
+      setpassword('')
+     
       setupdate(data.msg);
+      navigate('/');
     } catch (error) {
       console.error('Login failed:', error.message);
       setupdate('Login failed. Please try again.');

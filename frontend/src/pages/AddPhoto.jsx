@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-
 function AddPhoto() {
   const [title, settitle] = useState('');
   const [caption, setcaption] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [cookie, setCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
-  
+ 
+
+
   async function addImage() {
     if(caption.length == 50 || caption.length > 50){
       alert('caption length must be less that 50 character')
@@ -30,6 +31,9 @@ function AddPhoto() {
   
       const data = await res.json();
       alert(data.msg);
+      settitle('')
+      setcaption('')
+      setImageURL('')
       navigate('/');
     } catch (error) {
       console.error(error);
