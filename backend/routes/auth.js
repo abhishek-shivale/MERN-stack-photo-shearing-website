@@ -29,7 +29,7 @@ authRouter.post('/login', async (req, res) => {
       const user = await userModel.findOne({ username });
   
       if (!user) {
-        return res.json({ msg: 'Account not found' });
+        return res.status(404);
       }
   
       const isvalid = await bcrypt.compare(password, user.password);
@@ -38,7 +38,7 @@ authRouter.post('/login', async (req, res) => {
         const token = jwt.sign({ id: user._id }, 'secret');
         return res.json({ msg: 'Wait for login', token, userID: user._id });
       } else {
-        return res.json({ msg: 'Invalid password' });
+        return res.status(404)
       }
     } catch (error) {
       console.error(error);

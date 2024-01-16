@@ -52,21 +52,23 @@ function Home() {
     <div className='text-white'>
         <div className='flex justify-center'><h1 className='text-3xl m-5 mb-20 font-bold'>Image Gallery </h1></div>
         <div className='flex justify-center'>
-        <ul>
+        <div className="grid grid-cols-3 gap-8">
   {photos.map((photo) => (
-    <li key={photo._id} className="mb-8">
-      <div className="flex justify-center border-pink-500 border w-[680px] overflow-hidden"style={{ margin: '0', padding: '0' }}>
-        <img src={photo.imageURL} alt="" className="h-64 w-96 object-cover mr-4" />
-        <div className="text-white ">
-          <p className="font-bold text-pink-600 mb-2 text-xl w-48">{photo.title}</p>
-          <p className="mb-4 w-64 text-gray-400">{photo.caption}</p>
-          <button className="bg-pink-700 py-2 px-4  rounded"   onClick={() => likefunction(photo._id)}>Like</button>
-        </div>
+    <div key={photo._id} className="border-pink-500 border overflow-hidden">
+      <img src={photo.imageURL} alt="" className="h-64 w-full object-cover" />
+      <div className="text-white p-4">
+        <p className="font-bold text-pink-600 mb-2 text-xl">{photo.title}</p>
+        <p className="mb-4 text-gray-400">{photo.caption}</p>
+        <button
+          className="bg-pink-700 py-2 px-4 rounded"
+          onClick={() => likefunction(photo._id)}
+        >
+          Like
+        </button>
       </div>
-    </li>
+    </div>
   ))}
-</ul>
-
+</div>
         </div>
 
     </div>

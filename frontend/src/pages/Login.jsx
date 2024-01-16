@@ -22,15 +22,13 @@ function Login() {
           password,
         }),
       });
-      if(res.success){
-        const data = await res.json();
+      const data = await res.json();  
+      if(res.ok){ 
         setCookies('access_token', data.token);
+        console.log(data)
         window.localStorage.setItem('userId', data.userID);
+        navigate('/')
       }
-     
-
-     
-      return setupdate(data.msg);
     } catch (error) {
       console.error('Login failed:', error.message);
       setupdate('Login failed. Please try again.');
