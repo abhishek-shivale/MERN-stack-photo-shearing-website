@@ -16,7 +16,7 @@ function AddPhoto() {
       return
     }
     try {
-      const res = await fetch('http://localhost:3000/photo/add-photo', {
+      const res = await fetch('http://54.204.107.36:3000/photo/add-photo', {
         method: 'POST',
         headers: {
           authorization: cookie.access_token,

@@ -9,7 +9,7 @@ function LikedPhoto() {
     const fetchLikedPhotos = async () => {
       try {
         const userID = window.localStorage.getItem('userId');
-        const res = await fetch(`http://localhost:3000/photo/like/${userID}`, {
+        const res = await fetch(`http://54.204.107.36:3000/photo/like/${userID}`, {
           method: 'GET',
           headers: {
             authorization: cookie.access_token,

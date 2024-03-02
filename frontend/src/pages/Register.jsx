@@ -8,7 +8,7 @@ function Register() {
     const navigate = useNavigate();
     async function Registerfunction (){
         try {
-            const res = await fetch(`http://localhost:3000/auth/register`,{
+            const res = await fetch(`http://54.204.107.36:3000/auth/register`,{
                 method:'POST',
                 headers:{
                    'Content-Type':'application/json'

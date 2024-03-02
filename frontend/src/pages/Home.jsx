@@ -13,7 +13,7 @@ function Home() {
         return navigate('/register')
       }
       try {
-        const res = await fetch('http://localhost:3000/photo/liked-photo', {
+        const res = await fetch('http://54.204.107.36:3000/photo/liked-photo', {
           method: 'PUT',
           headers: {
             authorization: cookie.access_token,
@@ -36,7 +36,7 @@ function Home() {
     useEffect(
        ()=>{
         const fetchPhoto = async ()=>{
-            const res = await fetch(`http://localhost:3000/photo`,{
+            const res = await fetch(`http://54.204.107.36:3000/photo`,{
                 method: 'GET',
                 headers:{
                     authorization: cookie.access_token
